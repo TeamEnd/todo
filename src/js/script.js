@@ -9,6 +9,13 @@ document.getElementById('clear').addEventListener('click', () => {
   clear()
 })
 
+document.getElementById('add').addEventListener('click', () => {
+  const name = document.getElementById('name').value
+  const description = document.getElementById('description').value
+
+  addTodo(name, description)
+})
+
 function init () {
   if (!isItemExists()) {
     /*
@@ -16,10 +23,9 @@ function init () {
         {
           name: 'some name',
           description: 'some desc',
-          date: 'YYYY-MM-DD',
           id: 'randomid'
         }
-      */
+    */
     localStorage.setItem('data', '{ "todos": [] }')
   }
 
@@ -70,14 +76,12 @@ function isItemExists () {
  *
  * @param {string} name
  * @param {string} description
- * @param {string} date
  */
-function addTodo (name, description, date) {
+function addTodo (name, description) {
   const data = JSON.parse(localStorage.data)
   const obj = {
     name: name,
     description: description,
-    date: date,
     id: crypto.randomBytes(3).toString('hex'),
     canceled: false
   }
